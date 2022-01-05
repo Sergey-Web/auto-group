@@ -14,9 +14,8 @@ class CreateRegistrationConuterTable extends Migration
     {
         Schema::create(static::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_group_id')->constrained('users');
-            $table->unsignedInteger('players');
-            $table->tinyInteger('players_percent');
+            $table->foreignId(column: 'group_id')->constrained(table: 'groups')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->unsignedInteger(column: 'players')->default(0);
         });
     }
 

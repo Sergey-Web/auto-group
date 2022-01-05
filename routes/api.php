@@ -1,6 +1,9 @@
 <?php
 
-use Illuminate\Http\Request;
+declare(strict_types=1);
+
+use App\Http\Controllers\CounterController;
+use App\Http\Controllers\PlayerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get(
+    uri: '/create/',
+    action: [PlayerController::class, 'create']
+)->name(name: 'user_create');
+
+Route::get(
+    uri: '/counter-reset/',
+    action: [CounterController::class, 'reset']
+)->name(name: 'counter_reset');

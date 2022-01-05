@@ -12,11 +12,11 @@ class CreateGroupsTable extends Migration
 
     public function up(): void
     {
+        Schema::dropIfExists(table: 'personal_access_tokens');
         Schema::create(static::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-            $table->string(column: 'name', length: 50);
-            $table->tinyInteger(column: 'weight');
-            $table->tinyInteger(column: 'wight_percent');
+            $table->string(column: 'name', length: 50)->unique()->nullable(false);
+            $table->tinyInteger(column: 'weight')->nullable(false);
             $table->timestamps();
         });
     }

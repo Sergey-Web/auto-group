@@ -6,23 +6,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserGroupTable extends Migration
+class CreatePlayersTable extends Migration
 {
-    private const TABLE_NAME = 'user_group';
+    private const TABLE_NAME = 'players';
 
     public function up(): void
     {
         Schema::create(static::TABLE_NAME, function (Blueprint $table) {
             $table->id();
-
-            $table->foreignId(column: 'user_id')->constrained(table: 'users');
-            $table->foreignId(column: 'group_id')->constrained(table: 'groups');
-
-            $table->unique(['user_id', 'group_id']);
+            $table->string(column: 'display_name', length: 50)->unique()->nullable(false);
+            $table->timestamps();
         });
     }
 
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists(table: static::TABLE_NAME);
     }
